@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "mock": "json-mock-api --port 8888 --directory ./mock"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.11"
+  },
+  "dependencies": {
+    "@ionic/core": "^6.2.8",
+    "@ionic/vue": "^6.2.8",
+    "json-mock-api": "^1.2.2"
+  }
+}
