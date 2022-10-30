@@ -43,3 +43,7 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/prese
 
 ## Mock
 
+## Icons
+https://github.com/nuxt-modules/icon
+https://icones.js.org/collection/all
+

@@ -9,4 +9,13 @@ export const useTabStore = defineStore('tab', {
       tabObj: {} as Tab
     }
   },
+  actions: {
+    setActiveTabForContext(context, value) {
+      this.tabObj[context] = value
+      return this.tabObj[context]
+    },
+    getActiveTabForContext(context) {
+      return this.tabObj[context]
+    }
+  }
 })
