@@ -1,9 +1,9 @@
 <template>
-  <div class="h-full fixed bottom-0 top-0 left-0 right-0 z-0 bg-white" />
+  <div class="h-full fixed bottom-0 top-0 left-0 right-0 -z-10 bg-white" />
   <div class="container h-full mx-auto">
     <div class="flex flex-col h-full">
-      <main class="grow">
-        <IntervalTrainings />
+      <main class="grow p-3">
+        <RoutinesOverview />
       </main>
       <nav class="fixed bottom-0 left-0 right-0 bg-white z-10 text-slate-700">
         <TabNavigation class="border-t border-slate-200" :context="mainMenuContext" :defaultTab="1" :items="items" />
@@ -13,7 +13,7 @@
 
 </template>
 <script setup lang="ts">
-import IntervalTrainings from './components/app/IntervalTrainings.vue'
+import RoutinesOverview from './components/app/RoutinesOverview.vue'
 import TabNavigation from './components/tab/TabNavigation.vue'
 import TabItem from './interfaces/TabItem'
 const mainMenuContext = 'mainMenu'
