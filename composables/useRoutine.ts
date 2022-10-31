@@ -6,7 +6,17 @@ import { useLazyFetch } from "@/.nuxt/imports";
 const apiBaseURL = 'http://localhost:8888/api/'
 
 export const getAllRoutines = () : ILazyFetchRoutineResponse => {
-    const { pending, data } = useLazyFetch(apiBaseURL + 'routines')
+    const { pending, data } = useLazyFetch(apiBaseURL + 'routine')
+    const routines = data as Ref<IRoutine[]>
+    return { pending, routines }
+}
+export const getUserRoutines = () : ILazyFetchRoutineResponse => {
+    const { pending, data } = useLazyFetch(apiBaseURL + 'routine')
+    const routines = data as Ref<IRoutine[]>
+    return { pending, routines }
+}
+export const getPublicRoutines = () : ILazyFetchRoutineResponse => {
+    const { pending, data } = useLazyFetch(apiBaseURL + 'routine')
     const routines = data as Ref<IRoutine[]>
     return { pending, routines }
 }
