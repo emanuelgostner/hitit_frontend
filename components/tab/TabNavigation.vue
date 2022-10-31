@@ -1,6 +1,6 @@
 <template>
 <div :class='attrs.class'>
-  <div class="flex flex-row space-x-2 place-content-center pt-2 pb-7 text-base select-none">
+  <div class="flex flex-row space-x-2 place-content-center pt-2 pb-7 text-sm select-none">
     <button @click="tabStore.setActiveTabForContext(context, index)" v-for="(item, index) in items" :class="`
     ${activeTab === index ? 'active' : 'inactive'}
     basis-1/${items.length}

@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "mock": "json-mock-api --port 8888 --directory ./mock"
+    "mock": "json-mock-api --port 8888 --directory ."
   },
   "devDependencies": {
     "@kevinmarrec/nuxt-pwa": "^0.6.1",

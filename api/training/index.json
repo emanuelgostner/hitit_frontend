@@ -1,0 +1,79 @@
+[
+  {
+    "id": 123,
+    "title": "Ab Training",
+    "creator": "Emanuel",
+    "intervals": [
+      {
+        "id": 1,
+        "exercise": "Bodyweight Crunch",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Reverse Crunch",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Oblique Heel Taps",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Oblique Heel Taps",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Side Crunches",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Explosive Sit-Ups",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Plank Knee Ins",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Plank Rotations",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Russian Rotations",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      },
+      {
+        "id": 1,
+        "exercise": "Mountain climbers",
+        "duration": 30,
+        "rest": 5,
+        "repetitions": 1
+      }
+    ]
+  }
+]
