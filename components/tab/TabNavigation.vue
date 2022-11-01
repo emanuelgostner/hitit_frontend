@@ -13,7 +13,7 @@
     `">
       <template v-if="item.text && item.icon">
         <div class="flex flex-col justify-center">
-          <div><Icon :name="item.icon" class="text-red-400 group-focus:text-red-600 group-focus:scale-110"/></div>
+          <div><Icon :name="item.icon" class="group-focus:text-red-500"/></div>
           <div>{{item.text}}</div>
         </div>
       </template>
@@ -59,11 +59,13 @@ const attrs = useAttrs()
   svg {
     font-size: 2.2em;
     filter: drop-shadow(0.5px 0.5px 0.5px rgb(0 0 0 / 0.4));
+    transition: color .4s ease
   }
   &.active {
-    transform: scale(1.1);
     svg {
-      color: #dc2626;
+      -webkit-animation: jello-horizontal 0.9s both;
+      animation: jello-horizontal 0.9s both;
+      color: #ef4444;
     }
   }
 }

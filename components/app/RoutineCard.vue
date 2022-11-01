@@ -1,5 +1,5 @@
 <template>
-<div :class="`flex flex-row items-center justify-between p-3 drop-shadow-md rounded-lg bg-${randomColor}-200`">
+<div :class="`flex flex-row items-center justify-between p-3 shadow-md hover:shadow-inner rounded-lg bg-${randomColor}-200`">
   <div>
    <p class="text-lg font-bold">
      {{ routine.title }}
@@ -10,7 +10,7 @@
       </span>
     </p>
   </div>
-  <button ref="btn" @click="btnActive = true" :class="{ active : btnActive }">
+  <button ref="btn" @click="btnActive = true" :class="{'animate-myJello' : btnActive}">
     <Icon name="ic:outline-play-circle-filled" class="text-5xl"/>
   </button>
 
@@ -35,18 +35,3 @@ onMounted(() => {
 })
 const randomColor = computed(() => getRandomTailwindColor())
 </script>
-
-<style lang="less">
-button {
-  transform: scale(1);
-  transition: all ease-in-out;
-  &.active {
-    animation: bounce .3s ease-out;
-   }
-}
-@keyframes bounce {
-  0% { transform: scale(1) }
-  50% { transform: scale(1.2)}
-  100% { transform: scale(1) }
-}
-</style>
