@@ -1,12 +1,13 @@
 <template>
-<section>
+<section class="pt-3 pb-4">
   <h1 class="text-2xl font-bold">Your Routines</h1>
   <div v-if="userPending">
     Loading...
   </div>
-  <div v-else class="pt-3 pb-4">
+  <div v-else class="py-4">
     <RoutineCard v-for="routine in userRoutines" :routine="routine" />
   </div>
+  <ButtonAdd />
 </section>
   <section>
     <h1 class="text-2xl font-bold">Public Routines</h1>
@@ -22,8 +23,9 @@
 
 <script setup lang="ts">
 import RoutineCard from '@/components/app/RoutineCard.vue'
-import {getPublicRoutines, getUserRoutines} from "@/composables/useRoutine"
-import {computed, ComputedRef, watch} from "vue"
+import ButtonAdd from "@/components/button/ButtonAdd.vue"
+import { getPublicRoutines, getUserRoutines } from "@/composables/useRoutine"
+import { computed } from "vue"
 
 let userRoutines = null
 let userPending = null
