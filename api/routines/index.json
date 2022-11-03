@@ -75,5 +75,11 @@
         "repetitions": 1
       }
     ]
+  },
+  {
+    "id": "1234",
+    "title": "New workout",
+    "creator": "Jessica",
+    "intervals": []
   }
 ]

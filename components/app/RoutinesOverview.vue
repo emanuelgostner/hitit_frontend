@@ -1,4 +1,5 @@
 <template>
+<RoutineDetail />
 <section class="pt-3 pb-4">
   <h1 class="text-2xl font-bold">Your Routines</h1>
   <div v-if="userPending">
@@ -23,8 +24,8 @@
 
 <script setup lang="ts">
 import RoutineCard from '@/components/app/RoutineCard.vue'
+import RoutineDetail from '@/components/app/RoutineDetail.vue'
 import ButtonAdd from "@/components/button/ButtonAdd.vue"
-import { getPublicRoutines, getUserRoutines } from "@/composables/useRoutine"
 import { computed } from "vue"
 
 let userRoutines = null
