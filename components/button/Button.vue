@@ -1,5 +1,5 @@
 <template>
-  <button ref="btn" @click="btnActive = true" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none">
+  <button ref="btn" @click="handleClick" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none">
     <Icon :name="iconName" :class="[iconSize ? iconSize : 'text-3xl', {'animate-jello-horizontal': btnActive}]" />
   </button>
 </template>
@@ -17,6 +17,10 @@ onMounted(() => {
     btnActive.value = false
   }
 })
-
+const emit = defineEmits(['click'])
+const handleClick = () => {
+  btnActive.value = true
+  emit('click')
+}
 const { iconName, iconSize } = defineProps<Props>()
 </script>

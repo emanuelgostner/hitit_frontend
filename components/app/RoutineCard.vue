@@ -1,16 +1,16 @@
 <template>
-<div :class="`flex flex-row cursor-pointer items-center justify-between p-3 rounded-lg bg-${randomColor}-200`">
-  <div>
+<div :class="`flex flex-row cursor-pointer items-center justify-between rounded-lg bg-${randomColor}-200`" @click="handleClick">
+  <div class="p-3" >
    <p class="text-lg font-bold">
-     {{ routine.title }}
+     {{ routine.title || 'No title yet ☹️' }}
    </p>
-    <p class="text-sm text-slate-500">
+    <p v-if="routine.creator" class="text-sm text-slate-500">
       <span class="ml-4">
         {{ `by ${routine.creator}` }}
       </span>
     </p>
   </div>
-  <ButtonStart />
+  <ButtonStart class="mr-3" @click.stop.prevent />
 </div>
 </template>
 
@@ -25,4 +25,9 @@ interface Props {
 }
 const { routine } = defineProps<Props>()
 const randomColor = computed(() => getRandomTailwindColor())
+const emit = defineEmits(['click-content'])
+const handleClick = () => {
+  console.log('click')
+  emit('click-content')
+}
 </script>
