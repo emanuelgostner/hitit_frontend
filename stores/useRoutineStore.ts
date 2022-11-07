@@ -38,9 +38,14 @@ export const useRoutineStore = defineStore('routine', {
         },
         async loadPublicRoutines() {
             this.test = '1'
-            const data = await $fetch('http://localhost:8888/api/' + 'routines')
+            try {
+                const data = await $fetch('https://6368d90c15219b8496085dc2.mockapi.io/routines')
+                this.publicRoutines = data
+            }catch (e) {
+                console.log(e)
+            }
+
             this.test = '2'
-            this.publicRoutines = data
             this.test = '3'
         }
     }
