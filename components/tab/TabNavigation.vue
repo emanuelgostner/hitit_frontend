@@ -65,7 +65,7 @@ const attrs = useAttrs()
     svg {
       -webkit-animation: jello-horizontal 0.9s both;
       animation: jello-horizontal 0.9s both;
-      color: #ef4444;
+      color: #14b8a6;
     }
   }
 }

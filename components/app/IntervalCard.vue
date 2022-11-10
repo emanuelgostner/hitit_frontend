@@ -8,9 +8,9 @@
     </div>
   </div>
   <div class="flex flex-row justify-around mt-2 mb-1">
-    <p><i>Duration</i> <span class="font-medium">{{ interval.duration }}</span></p>
-    <p><i>Rest</i> {{ interval.rest }}</p>
-    <p><i>Repetitions</i> {{ interval.repetitions }}</p>
+    <p>Duration <span class="font-medium">{{ interval.duration }}</span></p>
+    <p>Rest <span class="font-medium">{{ interval.rest }}</span></p>
+    <p>Repetitions <span class="font-medium">{{ interval.repetitions }}</span></p>
   </div>
 </div>
 </template>

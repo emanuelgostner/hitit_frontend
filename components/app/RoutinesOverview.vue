@@ -7,6 +7,9 @@
       <div v-for="routine in userRoutines" class="pt-3">
         <RoutineCard :routine="routine" @clickContent="handleRoutineClick(routine, RoutineDetailViewType.private, $event)"/>
       </div>
+      <div v-if="!userRoutines.length">
+        <NoData />
+      </div>
     </div>
     <ButtonAdd @click="handleAddRoutineClick"/>
   </section>
@@ -25,6 +28,7 @@
 import RoutineCard from '@/components/app/RoutineCard.vue'
 import RoutineDetail from '@/components/app/RoutineDetail.vue'
 import ButtonAdd from "@/components/button/ButtonAdd.vue"
+import NoData from "@/components/common/NoData.vue"
 import {computed} from "vue"
 import {useRoutineStore} from "@/stores/useRoutineStore";
 import {IRoutine} from "@/interfaces/IRoutine";

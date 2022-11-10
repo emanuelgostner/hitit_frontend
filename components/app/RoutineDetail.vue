@@ -4,9 +4,9 @@
       <span>{{ routineDetail?.title }}</span>
     </template>
     <template #headerRight>
-      <Button v-if="isRoutineDetailPrivateView" iconName="mdi:trash-can-outline" iconSize="text-4xl" @click="handleDeleteRoutine"/>
-      <Button v-else iconName="mdi:content-copy" iconSize="text-4xl" @click="handleCopyRoutine"/>
-      <Button iconName="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine"/>
+      <Button v-if="isRoutineDetailPrivateView" icon-name="mdi:trash-can-outline" iconSize="text-4xl" @click="handleDeleteRoutine"/>
+      <Button v-else icon-name="mdi:content-copy" iconSize="text-4xl" @click="handleCopyRoutine"/>
+      <Button icon-name="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine"/>
     </template>
     <template #main>
       <div class="flex flex-col">
@@ -17,6 +17,14 @@
       </div>
     </template>
   </SideDrawer>
+  <BottomDrawer :active="editDetailsOpen" @close="editDetailsOpen=false">
+    <template #headerCenter><p class="text-2xl font-medium">Interval</p></template>
+    <template #main>
+      <div class="flex justify-center">
+        <Button icon-name="material-symbols:save-outline" icon-size="text-4xl" />
+      </div>
+    </template>
+  </BottomDrawer>
 </template>
 
 <script setup lang="ts">
@@ -24,9 +32,10 @@ import SideDrawer from '@/components/drawer/SideDrawer.vue'
 import Button from '@/components/button/Button.vue'
 import ButtonAdd from '@/components/button/ButtonAdd.vue'
 import IntervalCard from '@/components/app/IntervalCard.vue'
-import {computed} from "vue";
-import {useRoutineStore} from "@/stores/useRoutineStore";
-import {RoutineDetailViewType} from "@/enums/RoutineDetailViewType";
+import { computed, ref } from "vue";
+import { useRoutineStore } from "@/stores/useRoutineStore";
+import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
+import BottomDrawer from "@/components/drawer/BottomDrawer.vue";
 
 const routineStore = useRoutineStore()
 const routineDetail = computed(() => routineStore.routineDetail.routine)
@@ -34,6 +43,9 @@ const routineDetailOpen = computed(() => routineStore.routineDetail.open)
 const routineDetailColor = computed(() => routineStore.routineDetail.color)
 const isRoutineDetailPrivateView = computed(() => routineStore.routineDetail.type === RoutineDetailViewType.private)
 const intervals = computed(() => routineDetail.value?.intervals || [])
+const editDetailsOpen = ref(true)
+const editDetailsInterval = ref(null)
+
 const handleClickBack = () => routineStore.closeRoutineDetail()
 const handleDeleteRoutine = () => {
   routineStore.deleteRoutine(routineDetail.value)
@@ -43,7 +55,6 @@ const handleStartRoutine = () => {
 }
 const handleCopyRoutine = () => {
   const newCopiedRoutine = routineStore.copyRoutine(routineDetail.value)
-  console.log(newCopiedRoutine)
   routineStore.openRoutineDetail(newCopiedRoutine, RoutineDetailViewType.private)
 }
 const handleCopyInterval = (interval) => routineStore.copyInterval(routineDetail.value, interval)
