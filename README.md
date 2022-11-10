@@ -42,9 +42,9 @@ npm run preview
 Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
 
 ## Mock
-https://mockapi.io/projects/6368d90c15219b8496085dc3
+- https://mockapi.io/projects/6368d90c15219b8496085dc3
 
 ## Icons
-https://github.com/nuxt-modules/icon
-https://icones.js.org/collection/all
+- https://github.com/nuxt-modules/icon
+- https://icones.js.org/collection/all
 

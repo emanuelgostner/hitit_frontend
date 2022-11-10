@@ -13,7 +13,7 @@
     `">
       <template v-if="item.text && item.icon">
         <div class="flex flex-col justify-center">
-          <div><Icon :name="item.icon" class="group-focus:text-red-500"/></div>
+          <div><Icon :name="item.icon" class="group-focus:text-teal-500"/></div>
           <div>{{item.text}}</div>
         </div>
       </template>

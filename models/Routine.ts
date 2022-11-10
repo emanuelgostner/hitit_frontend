@@ -7,4 +7,12 @@ export class Routine implements IRoutine {
     "title": string = ''
     "creator": string = ''
     "intervals": IInterval[] = []
+
+    public static copy(routine : Routine) {
+       const copiedRoutine = new Routine()
+       copiedRoutine.title = routine.title
+       copiedRoutine.creator = routine.creator
+       copiedRoutine.intervals = routine.intervals
+       return copiedRoutine
+    }
 }

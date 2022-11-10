@@ -27,7 +27,6 @@ const { routine } = defineProps<Props>()
 const randomColor = computed(() => getRandomTailwindColor())
 const emit = defineEmits(['click-content'])
 const handleClick = () => {
-  console.log('click')
-  emit('click-content')
+  emit('click-content', randomColor.value)
 }
 </script>

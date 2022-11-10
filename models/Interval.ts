@@ -7,4 +7,13 @@ export class Interval implements IInterval {
     "duration" : number = 0
     "rest" : number = 0
     "repetitions": number = 1
+
+    public static copy(interval : IInterval) {
+        const copiedInterval = new Interval()
+        copiedInterval.exercise = interval.exercise
+        copiedInterval.duration = interval.duration
+        copiedInterval.rest = interval.rest
+        copiedInterval.repetitions = interval.repetitions
+        return copiedInterval
+    }
 }
