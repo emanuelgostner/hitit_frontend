@@ -32,7 +32,6 @@ import NoData from "@/components/common/NoData.vue"
 import {computed} from "vue"
 import {useRoutineStore} from "@/stores/useRoutineStore";
 import {IRoutine} from "@/interfaces/IRoutine";
-import {Routine} from "@/models/Routine";
 import {RoutineDetailViewType} from "@/enums/RoutineDetailViewType"
 
 const routineStore = useRoutineStore()
@@ -42,8 +41,7 @@ const userRoutines = computed(() => routineStore.userRoutines)
 const handleRoutineClick = (routine : IRoutine, routineDetailViewType : RoutineDetailViewType, color : String) =>
     routineStore.openRoutineDetail(routine, routineDetailViewType, color)
 const handleAddRoutineClick = () => {
-  const newRoutine = new Routine
-  routineStore.addRoutine(newRoutine)
+  const newRoutine = routineStore.addRoutine()
   routineStore.openRoutineDetail(newRoutine, RoutineDetailViewType.private)
 }
 </script>

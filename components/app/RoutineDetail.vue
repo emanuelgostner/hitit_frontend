@@ -1,7 +1,7 @@
 <template>
   <SideDrawer :active="routineDetailOpen" @click-back="handleClickBack" :color="routineDetailColor">
     <template #headerCenter>
-      <InputText v-if="isRoutineDetailPrivateView" lbl="No title yet" v-model="routineDetail.title" />
+      <InputText v-if="isRoutineDetailPrivateView" :dense="true" lbl="No title yet" v-model="routineDetail.title" />
       <span v-else>{{ routineDetail?.title }}</span>
     </template>
     <template #headerRight>
@@ -62,7 +62,9 @@ import { computed, ref } from "vue";
 import { useRoutineStore } from "@/stores/useRoutineStore";
 import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
 import BottomDrawer from "@/components/drawer/BottomDrawer.vue";
+import { IInterval } from "@/interfaces/IInterval";
 import { Interval } from "@/models/Interval";
+
 const inputDuration = ref(null)
 const routineStore = useRoutineStore()
 const routineDetail = computed(() => routineStore.routineDetail.routine)
@@ -86,10 +88,13 @@ const handleCopyRoutine = () => {
   const newCopiedRoutine = routineStore.copyRoutine(routineDetail.value)
   routineStore.openRoutineDetail(newCopiedRoutine, RoutineDetailViewType.private)
 }
-const handleCopyInterval = (interval) => routineStore.copyInterval(routineDetail.value, interval)
-const handleDeleteInterval = (interval) => routineStore.deleteInterval(routineDetail.value, interval)
-const handleAddNewInterval = () => routineStore.addInterval(routineDetail.value)
-const handleEditInterval = (interval) => {
+const handleCopyInterval = (interval : IInterval) => routineStore.copyInterval(routineDetail.value, interval)
+const handleDeleteInterval = (interval : IInterval) => routineStore.deleteInterval(routineDetail.value, interval)
+const handleAddNewInterval = () => {
+  const newInterval = routineStore.addInterval(routineDetail.value)
+  handleEditInterval(newInterval)
+}
+const handleEditInterval = (interval : IInterval) => {
   editDetailsInterval.value = interval
   editDetailsIntervalNewValue.value = Interval.copy(interval)
   editDetailsOpen.value = true

@@ -1,6 +1,10 @@
 <template>
   <div
-      class="header flex flex-col bg-slate-100 fixed w-full z-20 right-0 left-0 bottom-0 top-0 transition-all"
+      @click="$emit('close')"
+      class="fixed w-full h-full backdrop-blur-md bg-white/30 z-20" :class="active ? '' : 'invisible'"
+  />
+  <div
+      class="header flex flex-col border-slate-100 rounded-2xl bg-slate-100 fixed w-full z-30 right-0 left-0 bottom-0 top-0 transition-all"
       :class="active ? 'translate-y-96' : 'translate-y-full'">
     <div class="flex flex-row justify-between px-4 py-2">
       <div>

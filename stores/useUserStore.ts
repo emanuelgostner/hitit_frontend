@@ -6,5 +6,10 @@ export const useUserStore = defineStore('user', {
             // for initially empty lists
             user: {} as IUser
         }
+    },
+    actions: {
+        setUser(user : IUser) {
+            this.user = user
+        }
     }
 })

@@ -5,7 +5,9 @@ import { getUserRoutines } from '@/composables/useRoutine'
 import { IInterval } from "@/interfaces/IInterval";
 import { Interval } from "@/models/Interval";
 import { Routine } from "@/models/Routine";
-import {RoutineDetailViewType} from "@/enums/RoutineDetailViewType";
+import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
+import { useUserStore } from "@/stores/useUserStore";
+
 export const useRoutineStore = defineStore('routine', {
     state: () => {
         return {
@@ -34,8 +36,12 @@ export const useRoutineStore = defineStore('routine', {
             // this.routineDetail.routine = null
             this.routineDetail.open = false
         },
-        addRoutine(routine : IRoutine) {
-            this.userRoutines.push(routine)
+        addRoutine() : IRoutine {
+            const userStore = useUserStore()
+            const newRoutine = new Routine()
+            newRoutine.creator = userStore.user
+            this.userRoutines.push(newRoutine)
+            return newRoutine
         },
         deleteRoutine(routine : IRoutine) {
             this.userRoutines = this.userRoutines.filter(currRoutine => currRoutine.id !== routine.id )
@@ -52,7 +58,9 @@ export const useRoutineStore = defineStore('routine', {
             routine.intervals = routine.intervals.filter(currInterval => currInterval.id !== interval.id )
         },
         addInterval(routine : IRoutine) {
-            routine.intervals.push(new Interval)
+            const newInterval = new Interval()
+            routine.intervals.push(newInterval)
+            return newInterval
         },
         updateInterval(otherInterval : IInterval, intervalToUpdate : IInterval) {
             return Interval.copy(otherInterval, intervalToUpdate)

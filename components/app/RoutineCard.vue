@@ -6,7 +6,7 @@
    </p>
     <p v-if="routine.creator" class="text-sm text-slate-500">
       <span class="ml-4">
-        {{ `by ${routine.creator}` }}
+        {{ `by ${routine.creator.name}` }}
       </span>
     </p>
   </div>

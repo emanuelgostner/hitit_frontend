@@ -4,7 +4,7 @@
     <div class="flex flex-col h-full">
       <main class="grow text-slate-700">
         <TabContent :context="mainMenuContext" :tabIndex="0">
-         ❤ 
+         ❤
         </TabContent>
         <TabContent :context="mainMenuContext" :tabIndex="1">
           <RoutinesOverview />
@@ -25,10 +25,15 @@ import RoutinesOverview from '@/components/app/RoutinesOverview.vue'
 import TabNavigation from '@/components/tab/TabNavigation.vue'
 import TabContent from '@/components/tab/TabContent.vue'
 import TabItem from '@/interfaces/TabItem'
+import { useUserStore } from "@/stores/useUserStore";
+import { User } from "@/models/User";
+
 const mainMenuContext = 'mainMenu'
 const items: Array<TabItem> = [
   {text: 'History', icon:'mdi:calendar-clock'},
   {text: 'Routines', icon: 'ion:fitness'},
   {text: 'Exercises', icon:'maki:fitness-centre-11'}
 ]
+const userStore = useUserStore()
+userStore.setUser(new User('Guest'))
 </script>

@@ -1,14 +1,14 @@
 import { IRoutine } from "@/interfaces/IRoutine";
 import { unref } from 'vue'
 import {v4 as uuidV4} from 'uuid';
-import {IInterval} from "@/interfaces/IInterval";
+import { IInterval } from "@/interfaces/IInterval";
+import { IUser } from "@/interfaces/IUser";
 
 export class Routine implements IRoutine {
     "id": string = uuidV4()
     "title": string = ''
-    "creator": string = ''
+    "creator": IUser = {} as IUser
     "intervals": IInterval[] = []
-
     public static copy(routine : Routine) {
        const copiedRoutine = new Routine()
        copiedRoutine.title = unref(routine.title)
