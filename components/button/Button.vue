@@ -1,10 +1,6 @@
 <template>
-  <button ref="btn" @click="handleClick" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none">
-    <div :class="[iconSize ? iconSize : 'text-3xl', {'animate-jello-horizontal': btnActive}]">
-      <slot>
-        <Icon :name="iconName" />
-      </slot>
-    </div>
+  <button ref="btn" @click.stop.prevent @click="handleClick" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none">
+    <Icon :name="iconName" :class="[iconSize ? iconSize : 'text-3xl', {'animate-jello-horizontal': btnActive}]" />
   </button>
 </template>
 

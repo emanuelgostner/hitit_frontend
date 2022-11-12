@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { IRoutine } from "@/interfaces/IRoutine"
 import { IUser } from "@/interfaces/IUser"
-import { getPublicRoutines, getUserRoutines } from '@/composables/useRoutine'
+import { getUserRoutines } from '@/composables/useRoutine'
 import { IInterval } from "@/interfaces/IInterval";
 import { Interval } from "@/models/Interval";
 import { Routine } from "@/models/Routine";
@@ -53,6 +53,9 @@ export const useRoutineStore = defineStore('routine', {
         },
         addInterval(routine : IRoutine) {
             routine.intervals.push(new Interval)
+        },
+        updateInterval(otherInterval : IInterval, intervalToUpdate : IInterval) {
+            return Interval.copy(otherInterval, intervalToUpdate)
         },
         async loadRoutinesByUser(user : IUser) {
             getUserRoutines(user)

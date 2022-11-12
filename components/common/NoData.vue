@@ -1,6 +1,6 @@
 <template>
-<div class="p-3">
-  <p>So much empty... <Button>🙈</Button></p>
+<div class="p-7 text-center">
+  <p>So much empty... <span class="text-2xl">🙈</span></p>
 </div>
 
 </template>

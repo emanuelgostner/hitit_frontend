@@ -48,3 +48,7 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/prese
 - https://github.com/nuxt-modules/icon
 - https://icones.js.org/collection/all
 
+## gestures
+- https://interactjs.io/pro/
+- zingtouch
+- hammer.js

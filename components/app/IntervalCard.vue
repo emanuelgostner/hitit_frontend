@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col shadow py-2 px-3 rounded bg-white">
   <div class="flex flex-row justify-between">
-    <div><p class="font-medium text-teal-400">{{interval.exercise}}</p></div>
+    <div><p class="font-medium text-teal-500">{{interval.exercise}}</p></div>
     <div v-if="isRoutineDetailPrivateView">
       <Button icon-name="mdi:content-copy" icon-size="text-2xl" @click="emit('copy', interval)"/>
       <Button icon-name="mdi:trash-can-outline"  icon-size="text-2xl" class="ml-2" @click="emit('delete', interval)"/>

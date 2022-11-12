@@ -4,6 +4,8 @@
 
 html, body, #__nuxt {
     height: 100%;
+    /* fixes scrolling freeze on ios */
+    overflow: hidden;
 }
 html {
     font-family: system-ui;
