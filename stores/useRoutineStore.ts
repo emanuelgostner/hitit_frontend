@@ -36,6 +36,20 @@ export const useRoutineStore = defineStore('routine', {
             // this.routineDetail.routine = null
             this.routineDetail.open = false
         },
+        startRoutine(routine : IRoutine) {
+            this.routineStarted.routine = routine
+            this.routineStarted.open = true
+        },
+        minifyStartedRoutine() {
+            this.routineStarted.open = false
+        },
+        expandStartedRoutine() {
+            this.routineStarted.open = true
+        },
+        cancelStartedRoutine() {
+            this.routineStarted.routine = null
+            this.routineStarted.open = false
+        },
         addRoutine() : IRoutine {
             const userStore = useUserStore()
             const newRoutine = new Routine()

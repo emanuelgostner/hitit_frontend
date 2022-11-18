@@ -5,7 +5,10 @@
     <h1 class="text-2xl font-bold">Your Routines</h1>
     <div class="pb-2">
       <div v-for="routine in userRoutines" class="pt-3">
-        <RoutineCard :routine="routine" @clickContent="handleRoutineClick(routine, RoutineDetailViewType.private, $event)"/>
+        <RoutineCard
+            :routine="routine"
+            @clickContent="handleRoutineClick(routine, RoutineDetailViewType.private, $event)"
+            @clickStart="handleStartClick(routine)"/>
       </div>
       <div v-if="!userRoutines.length">
         <NoData />
@@ -17,7 +20,10 @@
     <h1 class="text-2xl font-bold">Public Routines</h1>
     <div class="pb-2">
       <div v-for="routine in publicRoutines" class="pt-3">
-        <RoutineCard :routine="routine" @clickContent="handleRoutineClick(routine, RoutineDetailViewType.public, $event)" />
+        <RoutineCard
+            :routine="routine"
+            @clickContent="handleRoutineClick(routine, RoutineDetailViewType.public, $event)"
+            @clickStart="handleStartClick(routine)"/>
       </div>
     </div>
   </section>
@@ -29,10 +35,10 @@ import RoutineCard from '@/components/app/RoutineCard.vue'
 import RoutineDetail from '@/components/app/RoutineDetail.vue'
 import ButtonAdd from "@/components/button/ButtonAdd.vue"
 import NoData from "@/components/common/NoData.vue"
-import {computed} from "vue"
-import {useRoutineStore} from "@/stores/useRoutineStore";
-import {IRoutine} from "@/interfaces/IRoutine";
-import {RoutineDetailViewType} from "@/enums/RoutineDetailViewType"
+import { computed } from "vue"
+import { useRoutineStore } from "@/stores/useRoutineStore";
+import { IRoutine } from "@/interfaces/IRoutine";
+import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType"
 
 const routineStore = useRoutineStore()
 routineStore.loadPublicRoutines()
@@ -43,6 +49,9 @@ const handleRoutineClick = (routine : IRoutine, routineDetailViewType : RoutineD
 const handleAddRoutineClick = () => {
   const newRoutine = routineStore.addRoutine()
   routineStore.openRoutineDetail(newRoutine, RoutineDetailViewType.private)
+}
+const handleStartClick = (routine : IRoutine) => {
+  routineStore.startRoutine(routine)
 }
 </script>
 

@@ -10,7 +10,7 @@
       </span>
     </p>
   </div>
-  <ButtonStart class="mr-3" @click.stop.prevent />
+  <ButtonStart class="mr-3" @click.stop.prevent @click="handleStartClick" />
 </div>
 </template>
 
@@ -25,8 +25,11 @@ interface Props {
 }
 const { routine } = defineProps<Props>()
 const randomColor = computed(() => getRandomTailwindColor())
-const emit = defineEmits(['click-content'])
+const emit = defineEmits(['click-content', 'click-start'])
 const handleClick = () => {
   emit('click-content', randomColor.value)
+}
+const handleStartClick = () => {
+  emit('click-start')
 }
 </script>
