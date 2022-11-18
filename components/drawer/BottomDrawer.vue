@@ -1,7 +1,7 @@
 <template>
   <div
       @click="$emit('close')"
-      class="fixed w-full h-full backdrop-blur-md bg-white/30 z-20" :class="active ? '' : 'invisible'"
+      class="fixed left-0 right-0 w-full h-full backdrop-blur-md bg-white/30 z-20" :class="active ? '' : 'invisible'"
   />
   <div
       class="header flex flex-col border-slate-100 rounded-2xl bg-slate-100 fixed w-full z-30 right-0 left-0 bottom-0 top-0 transition-all"

@@ -12,7 +12,7 @@ export const useRoutineStore = defineStore('routine', {
     state: () => {
         return {
             userRoutines: [] as IRoutine[],
-            publicRoutines: [],
+            publicRoutines: [] as IRoutine[],
             routineDetail: {
                 routine: null as IRoutine | null,
                 type: null as RoutineDetailViewType,

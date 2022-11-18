@@ -7,7 +7,7 @@
     <template #headerRight>
       <Button v-if="isRoutineDetailPrivateView" icon-name="mdi:trash-can-outline" iconSize="text-4xl" @click="handleDeleteRoutine"/>
       <Button v-else icon-name="mdi:content-copy" iconSize="text-4xl" @click="handleCopyRoutine"/>
-      <Button icon-name="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine"/>
+      <Button icon-name="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine(routineDetail)"/>
     </template>
     <template #main>
       <div class="flex flex-col">
@@ -63,6 +63,7 @@ import { useRoutineStore } from "@/stores/useRoutineStore";
 import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
 import BottomDrawer from "@/components/drawer/BottomDrawer.vue";
 import { IInterval } from "@/interfaces/IInterval";
+import { IRoutine } from '@/interfaces/IRoutine'
 import { Interval } from "@/models/Interval";
 
 const inputDuration = ref(null)
@@ -82,7 +83,8 @@ const handleDeleteRoutine = () => {
   routineStore.deleteRoutine(routineDetail.value)
   routineStore.closeRoutineDetail()
 }
-const handleStartRoutine = () => {
+const handleStartRoutine = (routine :IRoutine) => {
+  routineStore.startRoutine(routine)
 }
 const handleCopyRoutine = () => {
   const newCopiedRoutine = routineStore.copyRoutine(routineDetail.value)

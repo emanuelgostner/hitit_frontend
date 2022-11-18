@@ -7,7 +7,7 @@ import { IUser } from "@/interfaces/IUser";
 export class Routine implements IRoutine {
     "id": string = uuidV4()
     "title": string = ''
-    "creator": IUser = {} as IUser
+    "creator": IUser | null = null
     "intervals": IInterval[] = []
     public static copy(routine : Routine) {
        const copiedRoutine = new Routine()
