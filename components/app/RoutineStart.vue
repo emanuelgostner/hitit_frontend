@@ -14,7 +14,7 @@
       </div>
       <Button icon-name="radix-icons:cross-2" @click="closeStartedRoutine"/>
     </div>
-    <div v-if="showFullRoutine" class="main">
+    <div v-if="routineStarted" v-show="showFullRoutine" class="main">
       <RoutineTimer :routine="routine" />
     </div>
   </div>
