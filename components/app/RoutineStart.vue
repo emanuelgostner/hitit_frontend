@@ -14,40 +14,17 @@
       </div>
       <Button icon-name="radix-icons:cross-2" @click="closeStartedRoutine"/>
     </div>
-    <div v-show="showFullRoutine" class="main">
-      <div class="flex flex-col justify-center text-center">
-        <h1 class="text-3xl font-bold mt-5">{{ currentInterval.exercise }}</h1>
-        <div class="time font-extrabold my-7">{{ secondsToString(currentDuration) }}</div>
-        <div class="flex flex-row justify-around">
-          <div>
-            <div class="text-2xl font-semibold"><span class="font-bold">{{ currentLeftReps }}</span>/{{ currentInterval.repetitions }}</div>
-            <div class="text-xl">Reps</div>
-          </div>
-          <div>
-            <div class="text-2xl font-bold">{{ secondsToString(totalIntervalTime) }}</div>
-            <div class="text-xl">Total</div>
-          </div>
-          <div>
-            <div class="text-2xl font-semibold"><span class="font-bold">{{ intervalIndex + 1 }}</span>/{{ intervals.length - 1 }}</div>
-            <div class="text-xl">Intervals</div>
-          </div>
-        </div>
-        <div class="flex flex-row justify-around mt-3">
-          <Button iconSize="text-7xl" iconName="ic:round-keyboard-double-arrow-left"/>
-          <Button @click="pause = !pause" class="w-1/4" :iconSize="!pause ? 'text-7xl' : 'text-5xl'" :iconName="!pause ? 'material-symbols:play-arrow-rounded' : 'ph:pause-fill'"/>
-          <Button iconSize="text-7xl" iconName="ic:round-keyboard-double-arrow-right"/>
-        </div>
-      </div>
+    <div v-if="showFullRoutine" class="main">
+      <RoutineTimer :routine="routine" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ComputedRef, Ref, watch, ref } from "vue"
+import { computed } from "vue"
 import { useRoutineStore } from "@/stores/useRoutineStore"
 import Button from "@/components/button/Button.vue"
-import { IInterval } from "@/interfaces/IInterval";
-import { secondsToString } from "@/composables/useTimer";
+import RoutineTimer from '@/components/app/RoutineTimer.vue'
 
 const routineStore = useRoutineStore()
 const routine = computed(() => routineStore.routineStarted.routine)
@@ -59,60 +36,4 @@ const showMinifiedRoutine = computed(() => !!(routineStarted.value && !routineOp
 const closeStartedRoutine = routineStore.cancelStartedRoutine
 const minifyStartedRoutine = routineStore.minifyStartedRoutine
 const expandStartedRoutine = routineStore.expandStartedRoutine
-
-const intervals : ComputedRef<Array<IInterval>> = computed(() => routine?.value?.intervals)
-const totalIntervalTime : ComputedRef<number> = computed(() => intervals.value.reduce((sum, interval) => sum + interval.duration, 0))
-const currentInterval : Ref<IInterval | null> = ref(null)
-const currentDuration : Ref<number> = ref(0)
-const currentLeftReps : Ref<number> = ref(0)
-const currentRest : Ref<number> = ref(0)
-const intervalIndex : Ref<number> = ref(0)
-const pause : Ref<boolean> = ref(false)
-let intervalTimer = null
-const updateCurrentState = () => {
-  if (currentDuration.value === 0) {
-    currentLeftReps.value--
-    if (currentLeftReps.value === 0) {
-      clearInterval(intervalTimer)
-      intervalTimer = null
-      init()
-      return
-    }
-    currentDuration.value = currentInterval.value.duration
-    return
-  }
-  currentDuration.value--
-}
-const init = () => {
-  const currInterval = intervals.value[intervalIndex.value]
-  if (currInterval) {
-    intervalIndex.value++
-    mapIntervalToState(currInterval, currentInterval, currentDuration, currentLeftReps, currentRest)
-    startIntervalTimer()
-  }
-}
-const startIntervalTimer = () => {
-  intervalTimer = setInterval(updateCurrentState, 1000);
-}
-const mapIntervalToState = (
-  interval : IInterval,
-  currInterval : Ref<IInterval>,
-  currDur : Ref<number>,
-  currLeftReps : Ref<number>,
-  currRest : Ref<number>
-) => {
-  currInterval.value = interval
-  currDur.value = interval.duration
-  currLeftReps.value = interval.repetitions
-  currRest.value = interval.rest
-}
-if(intervals?.value?.length) {
-  intervalIndex.value = 0
-  init()
-}
 </script>
-<style scoped lang="less">
-::v-deep(.time) {
-  font-size: 7rem;
-}
-</style>

@@ -14,7 +14,7 @@
         </TabContent>
       </main>
       <nav class="fixed bottom-0 left-0 right-0 bg-white z-10 text-slate-600">
-        <RoutineStart v-if="routineStarted" />
+        <RoutineStart />
         <TabNavigation class="border-t border-slate-200" :context="mainMenuContext" :defaultTab="1" :items="items" />
       </nav>
     </div>
