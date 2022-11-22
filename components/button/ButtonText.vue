@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import {defineProps, onMounted, ref} from "vue";
 interface Props {
-  iconName : string,
+  iconName? : string,
   iconSize? : string
 }
 const btn = ref(null)

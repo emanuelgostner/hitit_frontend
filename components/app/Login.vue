@@ -1,5 +1,5 @@
 <template>
-  <BottomDrawer :active=active translateY="0px" @close="active = false">
+  <BottomDrawer :active=active translateY="0px" @close="handleClose">
     <template #main>
       <div class="px-4">
         <template v-if="showLogin">
@@ -25,6 +25,7 @@ import BottomDrawer from "@/components/drawer/BottomDrawer.vue";
 import ButtonText from '@/components/button/ButtonText.vue'
 import InputText from '@/components/input/InputText.vue'
 import { useUserStore } from "@/stores/useUserStore";
+import {User} from "@/models/User";
 
 const userStore = useUserStore()
 const active = ref(true)
@@ -38,11 +39,20 @@ const signupData = reactive({
   password: '',
   passwordConfirmation: ''
 })
-const handleLogin = () => {
-
+const closeWindow = () => {
+  active.value = false
 }
-const handleSignup = () => {
-
+const handleLogin = async () => {
+  await userStore.authUser(loginData.mail, loginData.password)
+  closeWindow()
+}
+const handleSignup = async () => {
+  await userStore.createUser(signupData.mail, signupData.password)
+  closeWindow()
+}
+const handleClose = () => {
+  userStore.setUser(new User('Guest'))
+  closeWindow()
 }
 </script>
 
