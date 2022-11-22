@@ -1,13 +1,13 @@
 <template>
-  <button ref="btn" @click.stop.prevent @click="handleClick" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none">
-    <slot>
-      <Icon :name="iconName" :class="[iconSize ? iconSize : 'text-3xl', {'animate-jello-horizontal': btnActive}]" />
-    </slot>
+  <button ref="btn" @click="handleClick" class="drop-shadow-md hover:drop-shadow-none active:drop-shadow-none bg-white rounded my-2 py-2 block w-full text-lg font-semibold">
+    <span class="inline-block" :class="{'animate-jello-horizontal': btnActive}">
+      <slot />
+    </span>
   </button>
 </template>
 
 <script setup lang="ts">
-import {defineProps, ref} from "vue";
+import {defineProps, onMounted, ref} from "vue";
 interface Props {
   iconName : string,
   iconSize? : string

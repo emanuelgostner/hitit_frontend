@@ -5,7 +5,7 @@
   />
   <div
       class="header flex flex-col border-slate-100 rounded-2xl bg-slate-100 fixed w-full z-30 right-0 left-0 bottom-0 top-0 transition-all"
-      :style="{ transform: active ? `translateY(${translate || '18rem'})` : 'translateY(100%)'}">
+      :style="{ transform: active ? `translateY(${translateY || '18rem'})` : 'translateY(100%)'}">
     <div class="flex flex-row justify-between px-4 py-2">
       <div>
         <slot name="headerLeft" />
@@ -25,9 +25,9 @@ import Button from '@/components/button/Button.vue'
 interface Props {
   active : boolean,
   color? : String,
-  translate? : String
+  translateY? : String
 }
-const { active, color = null, translate } = defineProps<Props>()
+const { active, color = null, translateY } = defineProps<Props>()
 </script>
 <style scoped lang="less">
 ::v-deep(&.header) {
