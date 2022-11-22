@@ -2,7 +2,7 @@
   <div class="h-full fixed bottom-0 top-0 left-0 right-0 -z-10 bg-white" />
   <div class="container h-full mx-auto select-none">
     <div class="flex flex-col h-full">
-      <main class="grow text-slate-700">
+      <main class="grow text-slate-700 overflow-auto pb-28">
         <TabContent :context="mainMenuContext" :tabIndex="0">
          ❤
         </TabContent>

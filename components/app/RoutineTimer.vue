@@ -27,9 +27,10 @@
 <script setup lang="ts">
 import {computed, ComputedRef, Ref, ref, defineProps} from "vue"
 import Button from "@/components/button/Button.vue"
+import Modal from '@/components/modal/Modal.vue'
 import { IInterval } from "@/interfaces/IInterval";
 import { secondsToString } from "@/composables/useTimer";
-import {IRoutine} from "@/interfaces/IRoutine";
+import { IRoutine } from "@/interfaces/IRoutine";
 interface Props {
   routine : IRoutine
 }
