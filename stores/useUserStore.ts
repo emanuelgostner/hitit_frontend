@@ -20,14 +20,13 @@ export const useUserStore = defineStore('user', {
         async authUser(email, password) {
             if (email && password) {
                 try {
-                    const data : IAuth = await $fetch(`${baseURL}/auth`, {
+                    const data : { user : IUser, auth : IAuth } = await $fetch(`${baseURL}/auth`, {
                         method: 'POST',
                         body: { email, password }
                     })
-                    console.log(data)
-                    this.auth = data
-                    this.user = new User(email)
-                    return this.auth
+                    this.auth = data.auth
+                    this.user = new User(data.user.email, data.user.name, data.user.userId)
+                    return { auth: this.auth, user: this.user}
                 }catch (e) {
                     console.log(e)
                 }
@@ -40,8 +39,8 @@ export const useUserStore = defineStore('user', {
                         method: 'POST',
                         body: { email, password }
                     })
-                    console.log(data)
-                    return data
+                    await this.authUser(email, password)
+                    return { auth: this.auth, user: this.user}
                 }catch (e) {
                     console.log(e)
                 }

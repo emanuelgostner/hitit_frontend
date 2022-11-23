@@ -3,17 +3,21 @@
     <template #main>
       <div class="px-4">
         <template v-if="showLogin">
-          <InputText v-model="loginData.mail" lbl="Your email" type="email"/>
-          <InputText v-model="loginData.password" lbl="Your password" type="password" />
-          <ButtonText @click="handleLogin">Log in</ButtonText>
-          <div class="text-blue-400 mt-7 text-center" @click="showLogin=false">Don't have an account yet? Sign up.</div>
+          <form @submit.prevent autocomplete="off">
+            <InputText required v-model="loginData.mail" lbl="Your email" type="email"/>
+            <InputText required v-model="loginData.password" lbl="Your password" type="password" />
+            <ButtonText @click="handleFormSubmit">Log in</ButtonText>
+            <div class="text-blue-400 mt-7 text-center" @click="showLogin=false">Don't have an account yet? Sign up.</div>
+          </form>
         </template>
         <template v-else>
-          <InputText v-model="signupData.mail" lbl="Your email" type="email" />
-          <InputText v-model="signupData.password" lbl="Your password" type="password" />
-          <InputText v-model="signupData.passwordConfirmation" lbl="Confirm your password" type="password" />
-          <ButtonText @click="handleSignup">Sign up</ButtonText>
-          <div class="text-blue-400 mt-7 text-center" @click="showLogin=true">Already have an account? Log in. </div>
+          <form @submit.prevent autocomplete="off">
+            <InputText required v-model="signupData.mail" lbl="Your email" type="email" />
+            <InputText required v-model="signupData.password" lbl="Your password" type="password" />
+            <InputText required v-model="signupData.passwordConfirmation" lbl="Confirm your password" type="password" />
+            <ButtonText @click="handleFormSubmit">Sign up</ButtonText>
+            <div class="text-blue-400 mt-7 text-center" @click="showLogin=true">Already have an account? Log in. </div>
+          </form>
         </template>
       </div>
     </template>
@@ -43,16 +47,22 @@ const closeWindow = () => {
   active.value = false
 }
 const handleLogin = async () => {
-  await userStore.authUser(loginData.mail, loginData.password)
-  closeWindow()
+  const auth = await userStore.authUser(loginData.mail, loginData.password)
+  return !!auth
 }
 const handleSignup = async () => {
-  await userStore.createUser(signupData.mail, signupData.password)
-  closeWindow()
+  const user = await userStore.createUser(signupData.mail, signupData.password)
+  return !!user
 }
 const handleClose = () => {
-  userStore.setUser(new User('Guest'))
+  userStore.setUser(new User('','Guest'))
   closeWindow()
+}
+const handleFormSubmit = async (e) => {
+  const submitSuccessfull = showLogin.value ? await handleLogin() : await handleSignup()
+  if (submitSuccessfull) {
+    closeWindow()
+  }
 }
 </script>
 

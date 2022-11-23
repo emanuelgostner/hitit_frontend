@@ -5,7 +5,9 @@
       :type="type"
       :placeholder="lbl"
       class="w-full text-lg border-2 border-white outline-none rounded-md focus:border-slate-500"
-      :class="{'my-2 py-2 px-4': !dense}"/>
+      :class="{'my-2 py-2 px-4': !dense}"
+      autocomplete="off"
+  />
 </template>
 
 <script setup lang="ts">
