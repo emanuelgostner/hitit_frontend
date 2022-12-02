@@ -35,13 +35,25 @@ import RoutineCard from '@/components/app/RoutineCard.vue'
 import RoutineDetail from '@/components/app/RoutineDetail.vue'
 import ButtonAdd from "@/components/button/ButtonAdd.vue"
 import NoData from "@/components/common/NoData.vue"
-import { computed } from "vue"
+import {computed, onMounted} from "vue"
 import { useRoutineStore } from "@/stores/useRoutineStore";
+import { useUserStore } from "@/stores/useUserStore";
 import { IRoutine } from "@/interfaces/IRoutine";
 import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType"
+import {Repository} from "@/repositories/Repository";
 
 const routineStore = useRoutineStore()
 routineStore.loadPublicRoutines()
+const userStore = useUserStore()
+const loggedIn = computed(() => userStore.loggedIn)
+watch(loggedIn, () => {
+  console.log('load by user1')
+  if (userStore.auth.accessToken) {
+    console.log('load by user2')
+    console.log('Repository.token',Repository.token)
+    routineStore.loadRoutinesByUser(userStore.user)
+  }
+},  { immediate:true })
 const publicRoutines = computed(() => routineStore.publicRoutines)
 const userRoutines = computed(() => routineStore.userRoutines)
 const handleRoutineClick = (routine : IRoutine, routineDetailViewType : RoutineDetailViewType, color : String) =>

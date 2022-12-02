@@ -7,7 +7,8 @@ import { Interval } from "@/models/Interval";
 import { Routine } from "@/models/Routine";
 import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
 import { useUserStore } from "@/stores/useUserStore";
-
+import {RoutinesRepository} from "@/repositories/RoutinesRepository";
+// const userStore = useUserStore()
 export const useRoutineStore = defineStore('routine', {
     state: () => {
         return {
@@ -80,12 +81,25 @@ export const useRoutineStore = defineStore('routine', {
             return Interval.copy(otherInterval, intervalToUpdate)
         },
         async loadRoutinesByUser(user : IUser) {
-            getUserRoutines(user)
+            try {
+                console.log('load routines')
+                const routineRepo = new RoutinesRepository('routines')
+                const data = await routineRepo.getById(user.userId)
+                console.log(data.value)
+                // const data = await getPublicRoutines()
+                this.userRoutines = data.value
+            }catch (e) {
+                console.log(e)
+            }
         },
         async loadPublicRoutines() {
             try {
-                const data = await $fetch('https://6368d90c15219b8496085dc2.mockapi.io/routines')
-                this.publicRoutines = data
+                console.log('load routines')
+                const routineRepo = new RoutinesRepository('routines')
+                const data = await routineRepo.getAll()
+                console.log(data.value)
+                // const data = await getPublicRoutines()
+               this.publicRoutines = data.value
             }catch (e) {
                 console.log(e)
             }
