@@ -78,7 +78,7 @@ const editDetailsInterval = ref(new Interval())
 const editDetailsIntervalNewValue = ref(new Interval())
 
 watch(routineDetailOpen, () => editDetailsOpen.value = false)
-const handleClickBack = () => routineStore.closeRoutineDetail()
+const handleClickBack = () => routineStore.closeRoutineDetail(true)
 const handleDeleteRoutine = () => {
   routineStore.deleteRoutine(routineDetail.value)
   routineStore.closeRoutineDetail()

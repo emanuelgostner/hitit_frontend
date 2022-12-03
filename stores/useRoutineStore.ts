@@ -33,8 +33,17 @@ export const useRoutineStore = defineStore('routine', {
             this.routineDetail.open = true
             this.routineDetail.color = color || null
         },
-        closeRoutineDetail() {
+        closeRoutineDetail(withSave) {
             // this.routineDetail.routine = null
+            const userStore = useUserStore()
+            if (userStore.loggedIn && this.routineDetail.routine && withSave ) {
+                const routineRepo = new RoutinesRepository('routines')
+                const routinePayload = this.routineDetail.routine
+                routinePayload.creator = routinePayload.creator.userId
+                routineRepo.update(this.routineDetail.routine.id, routinePayload).then((result) => {
+                    console.log('routine updated')
+                })
+            }
             this.routineDetail.open = false
         },
         startRoutine(routine : IRoutine) {
@@ -55,14 +64,34 @@ export const useRoutineStore = defineStore('routine', {
             const userStore = useUserStore()
             const newRoutine = new Routine()
             newRoutine.creator = userStore.user
+            if (userStore.loggedIn) {
+                const routineRepo = new RoutinesRepository('routines')
+                routineRepo.create(newRoutine).then((result) => {
+                    newRoutine.id = result.value.id
+                })
+            }
             this.userRoutines.push(newRoutine)
             return newRoutine
         },
         deleteRoutine(routine : IRoutine) {
+            const userStore = useUserStore()
+            if (userStore.loggedIn) {
+                const routineRepo = new RoutinesRepository('routines')
+                routineRepo.delete(routine.id).then((result) => {
+                    console.log('routine deleted', result)
+                })
+            }
             this.userRoutines = this.userRoutines.filter(currRoutine => currRoutine.id !== routine.id )
         },
         copyRoutine(routine : IRoutine) {
             const newCopiedRoutine = Routine.copy(routine)
+            const userStore = useUserStore()
+            if (userStore.loggedIn) {
+                const routineRepo = new RoutinesRepository('routines')
+                routineRepo.create(newCopiedRoutine).then((result) => {
+                    newCopiedRoutine.id = result.value.id
+                })
+            }
             this.userRoutines.push(newCopiedRoutine)
             return newCopiedRoutine
         },
@@ -82,7 +111,6 @@ export const useRoutineStore = defineStore('routine', {
         },
         async loadRoutinesByUser(user : IUser) {
             try {
-                console.log('load routines')
                 const routineRepo = new RoutinesRepository('routines')
                 const data = await routineRepo.getById(user.userId)
                 console.log(data.value)
@@ -94,7 +122,6 @@ export const useRoutineStore = defineStore('routine', {
         },
         async loadPublicRoutines() {
             try {
-                console.log('load routines')
                 const routineRepo = new RoutinesRepository('routines')
                 const data = await routineRepo.getAll()
                 console.log(data.value)

@@ -1,8 +1,7 @@
 import {IRepository} from "@/interfaces/repository/IRepository";
 import { useFetch } from "@/.nuxt/imports";
 import { Ref } from "@vue/reactivity";
-import { useUserStore } from "@/stores/useUserStore";
-import {IToken} from "@/interfaces/repository/IToken";
+import {ref} from "vue";
 
 let token = ''
 export abstract class Repository<T> implements IRepository<T> {
@@ -19,41 +18,45 @@ export abstract class Repository<T> implements IRepository<T> {
         return token
     }
     async create(obj : T) : Promise<Ref<T>> {
-        const { data } = await useFetch(Repository.apiBaseURL + '/' + this.context, {
-            body: obj,
+        const payload = typeof obj === 'object' ? JSON.stringify(obj) : obj
+        const data = await $fetch(Repository.apiBaseURL + '/' + this.context, {
+            method: 'POST',
+            body: payload,
             headers: {
                 Authorization: Repository.token
             }
         })
-        return <Ref<T>>data
+        return <Ref<T>>ref(data)
     }
     async update(id : string, obj : T) : Promise<Ref<T>> {
-        const { data } = await useFetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
-            body: obj,
+        const payload = typeof obj === 'object' ? JSON.stringify(obj) : obj
+        const data = await $fetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
+            method: 'PATCH',
+            body: payload,
             headers: {
                 Authorization: Repository.token
             }
         })
-        return <Ref<T>>data
+        return <Ref<T>>ref(data)
     }
     async delete(id : string) : Promise<Ref<boolean>> {
-        const { data } = await useFetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
+        const data = await $fetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
+            method: 'DELETE',
             headers: {
                 Authorization: Repository.token
             }
         })
-        return <Ref<boolean>>data
+        return <Ref<boolean>>ref(data)
     }
     async getById(id : string) : Promise<Ref<T>> {
-        const { data } = await useFetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
+        const data = await $fetch(Repository.apiBaseURL + '/' + this.context + '/' + id, {
             headers: {
                 Authorization: Repository.token
             }
         })
-        return <Ref<T>>data
+        return <Ref<T>>ref(data)
     }
     async getAll() : Promise<Ref<T[]>> {
-        console.log('this.getToken in Reposi', Repository.token)
         const { data } = await useFetch(Repository.apiBaseURL + '/' + this.context + '/', {
             headers: {
                 Authorization: Repository.token

@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', {
                         body: { email, password }
                     })
                     this.auth = data.auth
-                    this.user = new User(data.user.email, data.user.name, data.user.userId)
+                    this.user = new User(data.user.email, data.user.firstName, data.user.userId)
                     this.loggedIn = true
                     Repository.token = this.getBearerToken()
                     return { auth: this.auth, user: this.user}
