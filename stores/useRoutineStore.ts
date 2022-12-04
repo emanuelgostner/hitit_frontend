@@ -1,14 +1,12 @@
 import { defineStore } from 'pinia'
 import { IRoutine } from "@/interfaces/IRoutine"
 import { IUser } from "@/interfaces/IUser"
-import { getUserRoutines } from '@/composables/useRoutine'
 import { IInterval } from "@/interfaces/IInterval";
 import { Interval } from "@/models/Interval";
 import { Routine } from "@/models/Routine";
 import { RoutineDetailViewType } from "@/enums/RoutineDetailViewType";
 import { useUserStore } from "@/stores/useUserStore";
 import {RoutinesRepository} from "@/repositories/RoutinesRepository";
-// const userStore = useUserStore()
 export const useRoutineStore = defineStore('routine', {
     state: () => {
         return {
@@ -40,7 +38,7 @@ export const useRoutineStore = defineStore('routine', {
                 const routineRepo = new RoutinesRepository('routines')
                 const routinePayload = this.routineDetail.routine
                 routinePayload.creator = routinePayload.creator.userId
-                routineRepo.update(this.routineDetail.routine.id, routinePayload).then((result) => {
+                routineRepo.update(this.routineDetail.routine.id, routinePayload).then((_result) => {
                     console.log('routine updated')
                 })
             }
@@ -88,6 +86,7 @@ export const useRoutineStore = defineStore('routine', {
             const userStore = useUserStore()
             if (userStore.loggedIn) {
                 const routineRepo = new RoutinesRepository('routines')
+                newCopiedRoutine.creator = userStore.user
                 routineRepo.create(newCopiedRoutine).then((result) => {
                     newCopiedRoutine.id = result.value.id
                 })

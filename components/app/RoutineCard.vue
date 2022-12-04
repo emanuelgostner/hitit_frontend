@@ -4,7 +4,7 @@
    <p class="text-lg font-bold">
      {{ routine.title || 'No title yet ☹️' }}
    </p>
-    <p v-if="routine.creator" class="text-sm text-slate-500">
+    <p v-if="routine.creator && !hideCreator" class="text-sm text-slate-500">
       <span class="ml-4">
         {{ `by ${routine.creator.firstName}` }}
       </span>
@@ -21,9 +21,17 @@ import { IRoutine } from "@/interfaces/IRoutine";
 import ButtonStart from '@/components/button/ButtonStart.vue'
 import { getRandomTailwindColor } from "@/composables/useColor"
 interface Props {
-  routine : IRoutine
+  routine: {
+    type: IRoutine
+    required: true
+  },
+  hideCreator: {
+    type: boolean
+    required: false
+    default: false
+  }
 }
-const { routine } = defineProps<Props>()
+const { routine, hideCreator } = defineProps<Props>()
 const randomColor = computed(() => getRandomTailwindColor())
 const emit = defineEmits(['click-content', 'click-start'])
 const handleClick = () => {

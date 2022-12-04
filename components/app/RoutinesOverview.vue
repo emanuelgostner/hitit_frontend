@@ -7,6 +7,7 @@
       <div v-for="routine in userRoutines" class="pt-3">
         <RoutineCard
             :routine="routine"
+            :hide-creator="true"
             @clickContent="handleRoutineClick(routine, RoutineDetailViewType.private, $event)"
             @clickStart="handleStartClick(routine)"/>
       </div>
@@ -35,7 +36,7 @@ import RoutineCard from '@/components/app/RoutineCard.vue'
 import RoutineDetail from '@/components/app/RoutineDetail.vue'
 import ButtonAdd from "@/components/button/ButtonAdd.vue"
 import NoData from "@/components/common/NoData.vue"
-import {computed, onMounted} from "vue"
+import {computed} from "vue"
 import { useRoutineStore } from "@/stores/useRoutineStore";
 import { useUserStore } from "@/stores/useUserStore";
 import { IRoutine } from "@/interfaces/IRoutine";
