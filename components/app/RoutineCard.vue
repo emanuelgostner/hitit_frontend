@@ -18,8 +18,8 @@
 
 import { defineProps } from "vue";
 import { IRoutine } from "@/interfaces/IRoutine";
-import ButtonStart from '@/components/button/ButtonStart.vue'
-import { getRandomTailwindColor } from "@/composables/useColor"
+import ButtonStart from '../button/ButtonStart.vue'
+import { getRandomTailwindColor } from "../../composables/useColor"
 interface Props {
   routine: {
     type: IRoutine
