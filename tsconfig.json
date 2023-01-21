@@ -6,6 +6,15 @@
       "@/*": [
        "./*"
       ]
-     }
+     },
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "jest"
+    ],
+    "allowJs": true
    }
 }
