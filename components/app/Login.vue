@@ -1,22 +1,22 @@
 <template>
   <BottomDrawer :active=active translateY="0px" @close="handleClose">
     <template #main>
-      <div class="px-4">
+      <div class="px-4" data-testid="loginComponent">
         <template v-if="showLogin">
           <form @submit.prevent autocomplete="off">
-            <InputText required v-model="loginData.mail" lbl="Your email" type="email"/>
-            <InputText required v-model="loginData.password" lbl="Your password" type="password" />
-            <ButtonText @click="handleFormSubmit">Log in</ButtonText>
-            <div class="text-blue-400 mt-7 text-center" @click="showLogin=false">Don't have an account yet? Sign up.</div>
+            <InputText required v-model="loginData.mail" lbl="Your email" type="email" data-testid="loginMail"/>
+            <InputText required v-model="loginData.password" lbl="Your password" type="password" data-testid="loginPassword"/>
+            <ButtonText @click="handleFormSubmit" data-testid="loginButton">Log in</ButtonText>
+            <div class="text-blue-400 mt-7 text-center" @click="showLogin=false" data-testid="redirectToSignup">Don't have an account yet? Sign up.</div>
           </form>
         </template>
         <template v-else>
           <form @submit.prevent autocomplete="off">
-            <InputText required v-model="signupData.mail" lbl="Your email" type="email" />
-            <InputText required v-model="signupData.password" lbl="Your password" type="password" />
-            <InputText required v-model="signupData.passwordConfirmation" lbl="Confirm your password" type="password" />
-            <ButtonText @click="handleFormSubmit">Sign up</ButtonText>
-            <div class="text-blue-400 mt-7 text-center" @click="showLogin=true">Already have an account? Log in. </div>
+            <InputText required v-model="signupData.mail" lbl="Your email" type="email" data-testid="signupMail" />
+            <InputText required v-model="signupData.password" lbl="Your password" type="password" data-testid="signupPassword"/>
+            <InputText required v-model="signupData.passwordConfirmation" lbl="Confirm your password" type="password" data-testid="signupPasswordConfirmation" />
+            <ButtonText @click="handleFormSubmit" data-testid="signupButton">Sign up</ButtonText>
+            <div class="text-blue-400 mt-7 text-center" @click="showLogin=true" data-testid="redirectToLogin">Already have an account? Log in. </div>
           </form>
         </template>
       </div>
