@@ -1,7 +1,7 @@
 <template>
 <RoutineDetail />
-<div class="p-3">
-  <section class="pt-3 pb-2">
+<div class="p-3" data-testid="routineOverview">
+  <section class="pt-3 pb-2" data-testid="userRoutines">
     <h1 class="text-2xl font-bold">Your Routines</h1>
     <div class="pb-2">
       <div v-for="routine in userRoutines" class="pt-3">

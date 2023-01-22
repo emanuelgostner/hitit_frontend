@@ -1,5 +1,5 @@
 <template>
-<div :class="`flex flex-row cursor-pointer items-center justify-between rounded-lg bg-${randomColor}-200`" @click="handleClick">
+<div :class="`flex flex-row cursor-pointer items-center justify-between rounded-lg bg-${randomColor}-200`" @click="handleClick" data-testid="routineCard">
   <div class="p-3" >
    <p class="text-lg font-bold">
      {{ routine.title || 'No title yet ☹️' }}
