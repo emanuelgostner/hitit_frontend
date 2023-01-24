@@ -15,7 +15,7 @@
         <NoData />
       </div>
     </div>
-    <ButtonAdd @click="handleAddRoutineClick"/>
+    <ButtonAdd @click="handleAddRoutineClick" data-testid="newRoutine"/>
   </section>
   <section>
     <h1 class="text-2xl font-bold">Public Routines</h1>

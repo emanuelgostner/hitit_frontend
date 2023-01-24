@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col fixed h-full z-10 right-0 left-0 transition-all" :class="[active ? 'translate-x-0' : 'translate-x-full', color ? `bg-${color}-200` : 'bg-white']">
   <div class="flex flex-row items-center px-4 py-2 border-b border-slate-200 bg-white header">
-    <Button icon-name="material-symbols:arrow-back-ios-rounded" @click="$emit('click-back')"/>
+    <Button icon-name="material-symbols:arrow-back-ios-rounded" @click="$emit('click-back')" data-testid="drawerBack"/>
     <div class="text-xl ml-2 w-1/2">
       <slot name="headerCenter" />
     </div>

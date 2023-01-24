@@ -1,5 +1,6 @@
 <template>
   <div
+      data-testid="routineStart"
       @click="expandStartedRoutine"
       class="header flex flex-col fixed border-slate-100 translate-y-full rounded-2xl fixed bg-slate-100 w-full z-30 right-0 left-0 bottom-0 duration-300 ease-in-out transition-all"
       :class="[

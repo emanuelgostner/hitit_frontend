@@ -1,5 +1,5 @@
 <template>
-  <BottomDrawer :active=active translateY="0px" @close="handleClose">
+  <BottomDrawer :active=active translateY="0px" @close="handleClose" data-testid="loginComponent" id="login">
     <template #main>
       <div class="px-4" data-testid="loginComponent">
         <template v-if="showLogin">

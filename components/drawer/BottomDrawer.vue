@@ -13,7 +13,7 @@
       <div class="text-xl">
         <slot name="headerCenter" />
       </div>
-      <Button icon-name="radix-icons:cross-2" @click="$emit('close')"/>
+      <Button icon-name="radix-icons:cross-2" @click="$emit('close')" data-testid="closeDrawer" class="closeDrawer"/>
     </div>
     <div class="main pb-10 overflow-auto px-2">
       <slot name="main" />

@@ -1,16 +1,16 @@
 <template>
-  <SideDrawer :active="routineDetailOpen" @click-back="handleClickBack" :color="routineDetailColor">
+  <SideDrawer :active="routineDetailOpen" @click-back="handleClickBack" :color="routineDetailColor" data-testid="routineDetail">
     <template #headerCenter>
-      <InputText v-if="isRoutineDetailPrivateView" :dense="true" lbl="No title yet" v-model="routineDetail.title" />
+      <InputText v-if="isRoutineDetailPrivateView" :dense="true" lbl="No title yet" v-model="routineDetail.title" data-testid="routineTitleInput"/>
       <span v-else>{{ routineDetail?.title }}</span>
     </template>
     <template #headerRight>
-      <Button v-if="isRoutineDetailPrivateView" icon-name="mdi:trash-can-outline" iconSize="text-4xl" @click="handleDeleteRoutine"/>
+      <Button v-if="isRoutineDetailPrivateView" icon-name="mdi:trash-can-outline" iconSize="text-4xl" @click="handleDeleteRoutine" data-testid="deleteRoutine"/>
       <Button v-else icon-name="mdi:content-copy" iconSize="text-4xl" @click="handleCopyRoutine"/>
-      <Button icon-name="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine(routineDetail)"/>
+      <Button icon-name="ic:outline-play-circle-filled" iconSize="text-4xl" class="ml-3" @click="handleStartRoutine(routineDetail)" data-testid="startRoutine"/>
     </template>
     <template #main>
-      <div class="flex flex-col">
+      <div class="flex flex-col" data-testid="intervalContainer">
         <div v-for="interval in intervals" class="py-2">
           <IntervalCard
               :interval="interval"
@@ -19,7 +19,7 @@
               @click="isRoutineDetailPrivateView && handleEditInterval(interval)"
           />
         </div>
-        <ButtonAdd v-if="isRoutineDetailPrivateView" class="mt-2" @click="handleAddNewInterval" />
+        <ButtonAdd v-if="isRoutineDetailPrivateView" class="mt-2" @click="handleAddNewInterval" data-testid="newInterval" />
       </div>
     </template>
   </SideDrawer>
@@ -27,20 +27,21 @@
     <template #headerCenter><p class="text-2xl font-medium">Interval</p></template>
     <template #main>
       <div class="flex flex-col justify-center" >
-        <InputText lbl="Interval name" v-model="editDetailsIntervalNewValue.exercise" tabindex="1" class="text-teal-500 font-medium" @keyup.enter="inputDuration.getRoot().value.focus()"/>
+        <InputText data-testid="intervalTitle" lbl="Interval name" v-model="editDetailsIntervalNewValue.exercise" tabindex="1" class="text-teal-500 font-medium" @keyup.enter="inputDuration.getRoot().value.focus()"/>
         <div class="flex flex-row items-center">
-          <InputTimepicker ref="inputDuration" v-model="editDetailsIntervalNewValue.duration" tabindex="2" lbl="Duration" class="font-medium w-1/2" />
+          <InputTimepicker data-testid="intervalDuration" ref="inputDuration" v-model="editDetailsIntervalNewValue.duration" tabindex="2" lbl="Duration" class="font-medium w-1/2" />
           <div class="font-medium px-3">second/s duration</div>
         </div>
         <div class="flex items-center">
-          <InputTimepicker v-model="editDetailsIntervalNewValue.rest" tabindex="3" lbl="Rest" class="font-medium w-1/2" />
+          <InputTimepicker data-testid="intervalRest" v-model="editDetailsIntervalNewValue.rest" tabindex="3" lbl="Rest" class="font-medium w-1/2" />
           <span class="font-medium px-3">second/s rest</span>
         </div>
         <div class="flex items-center">
-          <InputTimepicker v-model="editDetailsIntervalNewValue.repetitions" tabindex="4" lbl="Repetitions" class="font-medium w-1/2" />
+          <InputTimepicker data-testid="intervalRepetitions" v-model="editDetailsIntervalNewValue.repetitions" tabindex="4" lbl="Repetitions" class="font-medium w-1/2" />
           <span class="font-medium px-3">repetition/s</span>
         </div>
         <Button
+            data-testid="intervalSave"
             @click="handleSaveInterval"
             tabindex="5"
             icon-name="material-symbols:save-outline"
