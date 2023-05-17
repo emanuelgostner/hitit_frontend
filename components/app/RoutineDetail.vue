@@ -11,9 +11,10 @@
     </template>
     <template #main>
       <div class="flex flex-col" data-testid="intervalContainer">
-        <div v-for="interval in intervals" class="py-2">
+        <div v-for="(interval, index) in intervals" class="py-2">
           <IntervalCard
               :interval="interval"
+              :data-testid='"intervalItem-"+(index+1)'
               @copy="isRoutineDetailPrivateView && handleCopyInterval(interval)"
               @delete="isRoutineDetailPrivateView && handleDeleteInterval(interval)"
               @click="isRoutineDetailPrivateView && handleEditInterval(interval)"

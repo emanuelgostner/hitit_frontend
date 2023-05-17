@@ -1,4 +1,5 @@
-const {Given, When, Then} = require('@cucumber/cucumber')
+/*global require, page*/
+const {Given, When, Then, setDefinitionFunctionWrapper} = require('@cucumber/cucumber')
 const { expect } = require("@playwright/test")
 Given('I am on the Routine Overview page', async function () {
     await page.goto('http://localhost:3000/') // <-- Nuxt app is running and route '/' is showing.

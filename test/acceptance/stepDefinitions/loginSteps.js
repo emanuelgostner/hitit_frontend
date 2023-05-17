@@ -1,3 +1,4 @@
+/*global require, page*/
 const {Given, When, Then} = require('@cucumber/cucumber')
 const { expect } = require("@playwright/test")
 // 1
@@ -5,9 +6,9 @@ Given('I open the App the first time with the baseURL', async function () {
     await page.goto('http://localhost:3000/') // <-- Nuxt app is running and route '/' is showing.
     await expect(page.getByTestId('loginComponent')).toBeVisible()
 });
-Then('input {string} should be visible', async function (string) {
-    await expect(page.getByTestId(string)).toBeVisible()
-});
+// Then('input {string} should be visible', async function (string) {
+//     await expect(page.getByTestId(string)).toBeVisible()
+// });
 Then('button {string} should be visible', async function (string) {
     await expect(page.getByTestId(string)).toBeVisible()
 });
@@ -41,5 +42,6 @@ Then('the {string} component should contain routines or the message {string}', a
     const componentContainsRoutine = await component.getByTestId(string)
     await expect( componentContainsText || componentContainsRoutine).toBeTruthy()
 });
+
 
 

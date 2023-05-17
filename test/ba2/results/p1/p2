@@ -1,0 +1,67 @@
+The following prompt consists of Task Description, Example Task Input, Example Task Output and Task Input.
+
+Task Description:
+- The Task input is a Gherkin Specifiction describing a feature with multiple Scenarios. Each Scenario contains steps
+- The Task Output should contain end to end test cases for the steps included in the provided input
+- The Task Output should use the framework cucumber to implement the steps for each scenario. 
+- The test-cases must be implemented using the framework playwright
+- Steps should not be duplicated if variables are used in the specification
+- Output only code, without description
+- Comment test cases/code using jsdoc
+- Whereever possible use the getByTestId locator of playwright
+- Playwright TestIds use the naming convention so that the name consist of the component where it is used and purpose in lowerCamelCase style but not the type of element like button or input
+- the baseURL is 'http://localhost:3000/'
+
+Example Task Input:
+Feature: Shopping Cart
+    As a customer
+    I want to be able to add and remove items from my shopping cart
+    So that I can manage my desired purchases before checking out
+
+    Scenario: Adding a product to the shopping cart
+        Given I am on the product listing page
+        When I click the "Add to cart" button for the "Laptop" product
+        Then the "Laptop" product should be in my shopping cart
+        And the total cost of my shopping cart should be 1200
+
+Example Task Output:
+````
+/*global require, page*/
+const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
+
+const baseURL = 'http://localhost:3000/'
+
+Given('I am on the product listing page', async function () {
+  await page.goto(`${baseURL}/products`);
+});
+
+When('I click the {string} button for the {string} product', async function (button, product) {
+  const addToCartButton = await page.getByTestId(`addToCart-${product.toLowerCase()}`);
+  await addToCartButton.click();
+});
+
+Then('the {string} product should be in my shopping cart', async function (product) {
+  await page.goto(`${baseURL}/cart`);
+  const productInCart = await page.getByTestId(`cartItem-${product.toLowerCase()}`);
+  expect(productInCart).toBeVisible();
+});
+
+Then('the total cost of my shopping cart should be {int}', async function (totalCost) {
+  const cartTotal = await page.getByTestId('cartTotal');
+  const cartTotalText = await cartTotal.textContent();
+  expect(parseFloat(cartTotalText)).toBe(totalCost);
+});
+````
+
+Task Input:
+Feature: Login
+    In order to save created data and to load it if accessed on another device
+    As a user
+    I want the possibility to sign up and/or sign into the application with an email and password
+    The Login form should therefore be the first thing that is shown.
+    The possiblity to continue anonymously by closing the login form should also be possible.
+
+    Scenario: Initial visibility of the login form
+        Given the user opens the application
+        Then the signin form with username and passowrd should be visible

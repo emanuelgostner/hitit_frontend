@@ -1,0 +1,23 @@
+The following prompt consists of a Task Description and a Task Input.
+
+Task Description:
+- The Task input is a Gherkin Specifiction describing a feature with multiple Scenarios. Each Scenario contains steps
+- The Task Output should use the framework cucumber to implement the steps for each scenario. The test-cases should be implemented using the framework playwright
+- Steps should not be duplicated if variables are used in the specification
+- Output only code, without description
+- Comment code using jsdoc
+- testIds should contain the component and purpose in lowerCamelCase style but not the type of element like button or input
+- the baseURL is 'http://localhost:3000/'
+
+
+Task Input:
+Feature: Login
+    In order to save created data and to load it if accessed on another device
+    As a user
+    I want the possibility to sign up and/or sign into the application with an email and password
+    The Login form should therefore be the first thing that is shown.
+    The possiblity to continue anonymously by closing the login form should also be possible.
+
+    Scenario: Initial visibility of the login component
+        Given the user opens the application
+        Then the signIn component with username and passowrd should be visible

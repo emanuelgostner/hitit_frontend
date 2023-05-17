@@ -13,7 +13,7 @@
       <div class="text-xl">
         <slot name="headerCenter" />
       </div>
-      <Button icon-name="radix-icons:cross-2" @click="$emit('close')" data-testid="closeDrawer" class="closeDrawer"/>
+      <Button icon-name="radix-icons:cross-2" @click="$emit('close')" :data-testid="buttonTestId || 'closeDrawer'" class="closeDrawer"/>
     </div>
     <div class="main pb-10 overflow-auto px-2">
       <slot name="main" />
@@ -25,7 +25,8 @@ import Button from '@/components/button/Button.vue'
 interface Props {
   active : boolean,
   color? : String,
-  translateY? : String
+  translateY? : String,
+  buttonTestId?: String
 }
 const { active, color = null, translateY } = defineProps<Props>()
 </script>
