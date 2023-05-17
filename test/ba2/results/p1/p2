@@ -1,17 +1,29 @@
-The following prompt consists of Task Description, Example Task Input, Example Task Output and Task Input.
-
+The following prompt consists of Task Description, Task Input, Example Task Input, Example Task Output. Read the Task description very carefully and apply each instruction.
+---
 Task Description:
-- The Task input is a Gherkin Specifiction describing a feature with multiple Scenarios. Each Scenario contains steps
+- The Task input is a Gherkin Specification describing a feature with multiple Scenarios. Each Scenario contains steps
 - The Task Output should contain end to end test cases for the steps included in the provided input
-- The Task Output should use the framework cucumber to implement the steps for each scenario. 
+- The Task Output should use the framework cucumber to implement the steps for each scenario.
 - The test-cases must be implemented using the framework playwright
 - Steps should not be duplicated if variables are used in the specification
 - Output only code, without description
 - Comment test cases/code using jsdoc
-- Whereever possible use the getByTestId locator of playwright
+- Wherever possible use the getByTestId locator of playwright
 - Playwright TestIds use the naming convention so that the name consist of the component where it is used and purpose in lowerCamelCase style but not the type of element like button or input
 - the baseURL is 'http://localhost:3000/'
+---
+Task Input:
+Feature: Login
+    In order to save created data and to load it if accessed on another device
+    As a user
+    I want the possibility to sign up and/or sign into the application with an email and password
+    The Login form should therefore be the first thing that is shown.
+    The possibility to continue anonymously by closing the login form should also be possible.
 
+    Scenario: Initial visibility of the login form
+        Given the user opens the application
+        Then the signIn form with username and password should be visible
+---
 Example Task Input:
 Feature: Shopping Cart
     As a customer
@@ -23,7 +35,7 @@ Feature: Shopping Cart
         When I click the "Add to cart" button for the "Laptop" product
         Then the "Laptop" product should be in my shopping cart
         And the total cost of my shopping cart should be 1200
-
+---
 Example Task Output:
 ````
 /*global require, page*/
@@ -53,15 +65,3 @@ Then('the total cost of my shopping cart should be {int}', async function (total
   expect(parseFloat(cartTotalText)).toBe(totalCost);
 });
 ````
-
-Task Input:
-Feature: Login
-    In order to save created data and to load it if accessed on another device
-    As a user
-    I want the possibility to sign up and/or sign into the application with an email and password
-    The Login form should therefore be the first thing that is shown.
-    The possiblity to continue anonymously by closing the login form should also be possible.
-
-    Scenario: Initial visibility of the login form
-        Given the user opens the application
-        Then the signin form with username and passowrd should be visible
