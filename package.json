@@ -12,7 +12,9 @@
     "coverage": "vitest run --coverage",
     "testplaywright": "npx playwright test",
     "test:e2e": "cucumber-js --require cucumber.conf.js --require test/acceptance/stepDefinitions/**/*.js --format @cucumber/pretty-formatter",
-    "ba2testExecution": "cucumber-js --require cucumber.conf.js --require test/ba2/results/p1/**/*.js --format @cucumber/pretty-formatter"
+    "ba2testExecution": "cucumber-js --require cucumber.conf.js --require test/ba2/results/p2/**/*.js --format @cucumber/pretty-formatter",
+    "ba2testExecutionRoutine": "cucumber-js --require cucumber.conf.js --require test/ba2/results/p2/p2.2.RoutineSteps.js --format @cucumber/pretty-formatter",
+    "ba2testExecutionLogin02": "cucumber-js --require cucumber.conf.js --require test/ba2/results/p2/p2.2.Login02Steps.js --format @cucumber/pretty-formatter"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^7.3.1",

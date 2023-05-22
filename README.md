@@ -13,6 +13,7 @@
 ## tests
 ### cucumber tests with playwright test runner
 run cucumber playwright tests with: `npm run test:e2e test/acceptance/features/login.feature`
+run cucumber playwright tests with: `npm run ba2testExecution test/ba2/features/Interval.feature`
 
 which uses following package.json config 
 ```

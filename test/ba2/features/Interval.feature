@@ -9,16 +9,16 @@ Feature: Routines with intervalls
     
 
     Scenario: Add interval to new routine
-        When the user clicks on the Button "newRoutine"
+        When the user clicks on the button "newRoutine"
         And the component "routineDetail" is visible
-        When the user clicks on the Button "newInterval"
-        And the user fills <title> into the field "intervalTitle"
-        And the user fills <duration> into the field "intervalDuration"
-        And the user fills <rest> into the field "intervalRest"
-        And the user fills <reps> into the field "intervalRepetitions" 
-        And the user clicks on the Button "intervalSave"
+        When the user clicks on the button "newInterval"
+        And the user fills "<title>" into the field "intervalTitle"
+        And the user fills "<duration>" into the field "intervalDuration"
+        And the user fills "<rest>" into the field "intervalRest"
+        And the user fills "<reps>" into the field "intervalRepetitions" 
+        And the user clicks on the button "intervalSave"
         Then the component "intervalContainer" is visible
-        And the component "intervalItem-<id>" contains follwing visible fields with text. title: <title>, duration: <duration>, rest: <rest>, reps: <reps>
+        And the component "intervalItem-<id>" contains following visible fields with text. title: "<title>", duration: <duration>, rest: <rest>, reps: <reps>
 
         Examples:
             |   title              |   duration  |   rest    |   reps   | id |
@@ -27,9 +27,9 @@ Feature: Routines with intervalls
             |   third Interval    |   5         |   0       |   1      | 3 |
         
     Scenario: Delete interval
-        When the user clicks on the Button "newRoutine"
+        When the user clicks on the button "newRoutine"
         And the component "routineDetail" is visible
-        And the user clicks on the Button "newInterval"
-        And the user clicks on the Button "closeDrawer"
-        When the user clicks on the Button "closeDrawer" in the component "intervalItem-1"
+        And the user clicks on the button "newInterval"
+        And the user clicks on the button "closeDrawer"
+        When the user clicks on the button "closeDrawer" in the component "intervalItem-1"
         Then the component "intervalItem-1" is not visible

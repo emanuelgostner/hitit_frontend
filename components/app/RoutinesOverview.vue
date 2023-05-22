@@ -1,7 +1,7 @@
 <template>
 <RoutineDetail />
-<div class="p-3" data-testid="routineOverview">
-  <section class="pt-3 pb-2" data-testid="userRoutines">
+<div class="p-3" data-testid="routineOverviewComponent">
+  <section class="pt-3 pb-2" data-testid="userRoutinesList">
     <h1 class="text-2xl font-bold">Your Routines</h1>
     <div class="pb-2">
       <div v-for="routine in userRoutines" class="pt-3">
@@ -67,7 +67,3 @@ const handleStartClick = (routine : IRoutine) => {
   routineStore.startRoutine(routine)
 }
 </script>
-
-<style scoped>
-
-</style>

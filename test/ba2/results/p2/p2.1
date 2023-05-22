@@ -1,0 +1,58 @@
+The following prompt consists of Task Description, Task Input, Example Task Input, Example Task Output. Read each bullet point in the Task description very carefully and apply each instruction.
+---
+Task Description:
+- The Task input is a Gherkin Specification describing a feature with multiple Scenarios. Each Scenario contains steps
+- The Task Output should contain end to end test cases for the steps included in the provided input
+- The Task Output should use the framework cucumber to implement the steps for each scenario.
+- The test-cases must be implemented using the framework playwright
+- Steps should not be duplicated if variables are used in the specification
+- Output only code, without description
+- Use Js doc to comment the Given, When, Then, And, But implementation.
+- Wherever possible use the getByTestId locator of playwright
+- Playwright TestIds use the naming convention so that the name consist of the component where it is used and purpose in lowerCamelCase style but not the type of element like button or input
+- the baseURL is 'http://localhost:3000/'
+---
+Task Input:
+
+---
+Example Task Input:
+Feature: Shopping Cart
+    As a customer
+    I want to be able to add and remove items from my shopping cart
+    So that I can manage my desired purchases before checking out
+
+    Scenario: Adding a product to the shopping cart
+        Given I am on the product listing page
+        When I click the "Add to cart" button for the "Laptop" product
+        Then the "Laptop" product should be in my shopping cart
+        And the total cost of my shopping cart should be 1200
+---
+Example Task Output:
+````
+/*global require, page*/
+const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
+
+const baseURL = 'http://localhost:3000/'
+
+Given('I am on the product listing page', async function () {
+  await page.goto(`${baseURL}/products`);
+});
+
+When('I click the {string} button for the {string} product', async function (button, product) {
+  const addToCartButton = await page.getByTestId(`addToCart-${product.toLowerCase()}`);
+  await addToCartButton.click();
+});
+
+Then('the {string} product should be in my shopping cart', async function (product) {
+  await page.goto(`${baseURL}/cart`);
+  const productInCart = await page.getByTestId(`cartItem-${product.toLowerCase()}`);
+  expect(productInCart).toBeVisible();
+});
+
+Then('the total cost of my shopping cart should be {int}', async function (totalCost) {
+  const cartTotal = await page.getByTestId('cartTotal');
+  const cartTotalText = await cartTotal.textContent();
+  expect(parseFloat(cartTotalText)).toBe(totalCost);
+});
+````
