@@ -1,16 +1,6 @@
 The following prompt consists of a Task Description and a Task Input.
 
 Task Description:
-Create end to end test-cases for the Gherkin Specification in the Task Input. Use the framework Cucumber to reference the Gherkin steps and the framework playwright to actually implement the edn to end test cases within the steps.
+Create end to end test-cases for the Gherkin Specification in the Task Input. Use the framework Cucumber to reference the Gherkin steps and the framework playwright as the assertion framework to actually implement the end to end test cases within the steps.
 
 Task Input:
-Feature: Login
-    In order to save created data and to load it if accessed on another device
-    As a user
-    I want the possibility to sign up and/or sign into the application with an email and password
-    The Login form should therefore be the first thing that is shown.
-    The possiblity to continue anonymously by closing the login form should also be possible.
-
-    Scenario: Initial visibility of the login component
-        Given the user opens the application
-        Then the signIn component with username and passowrd should be visible
