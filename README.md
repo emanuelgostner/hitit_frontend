@@ -45,6 +45,7 @@ which uses following package.json config:
 "testplaywright": "npx playwright test"
 ```
 ## Stack
+Testing: Playwright, Cucumber, Vitest
 Frontend: Vue, Nuxt
 Backend: Mongodb, Express, Mongoose
 ## App showcase
